@@ -1,0 +1,9 @@
+version: '1.0'
+services:
+  oracle:
+    build: .
+    command: nodemon --legacy-watch api.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/code/app/src

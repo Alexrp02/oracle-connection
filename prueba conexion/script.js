@@ -17,7 +17,14 @@ button.addEventListener( 'click' , event => {
         [desc.value, done.value] 
     ] ;
     console.log(task) ;
-    postData(task) ;
+    postData(task)
+    .then(response => response.json())
+    .then(res => {
+        console.log(res) ;
+        if(res.errorNum == 1) alert("Ese cliente ya existe en la base de datos.") ;
+        if(res.errorNum == 1400) alert ("No se permiten valores nulos") ;
+    });
+    
 }) ;
 
 oracle.addEventListener('click', async e => {
@@ -58,9 +65,12 @@ async function postData(json) {
         body: JSON.stringify(json)
     }
 
-    fetch('http://127.0.0.1:3000/add', requestOptions)
-    .then(response => response.json())
-    .then(res => console.log(res));
+    return fetch('http://127.0.0.1:3000/add', requestOptions)
+    // .then(response => response.json())
+    // .then(res => {
+    //     console.log(res) ;
+    //     return res ;
+    // });
 }
 
 // fetchData() ;

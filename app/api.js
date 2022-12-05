@@ -3,6 +3,7 @@ const app = express();
 const morgan=require('morgan');
 const oracledb = require('oracledb');
 const cors = require('cors') ;
+let connection ;
 
 //Configuraciones
 app.set('port', process.env.PORT || 3000);
@@ -16,6 +17,17 @@ app.use(cors({
     origin: '*'
 })) ;
 
+async function initDatabaseConnection () {
+    try {
+        connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
+        console.log("Successfully connected to Oracle Database");
+    } catch (error) {
+        console.log(error) ;
+    }
+}
+
+initDatabaseConnection() ;
+
 app.get('/', (req, res) => {    
     res.json(
         {
@@ -28,12 +40,11 @@ app.get('/oracle', async (req, res) => {
     res.json(await getTodo()) ;
 })
 
-app.post('/add', (req, res) => {
+app.post('/add', async (req, res) => {
 
     const tasks = req.body ;
     console.log(tasks) ;
-    postData(tasks) ;
-    res.send(JSON.stringify("Information added correctly!")) ;
+    res.send(await postData(tasks)) ;
 })
 
 //Iniciando el servidor, escuchando...
@@ -44,10 +55,7 @@ app.listen(app.get('port'),()=>{
 
 
 async function getTodo() {
-    let connection ;
     try{
-        connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
-        console.log("Successfully connected to Oracle Database");
         let result = await connection.execute(
             `select DNI, NOMBRE from CLIENTE`,
             [],
@@ -70,23 +78,11 @@ async function getTodo() {
         return result.rows ;
     }catch(err){
         console.log(err) ;
-    }finally{
-        if(connection) {
-            try {
-                await connection.close();
-                console.log("Connection with database closed!") ;
-              } catch (err) {
-                console.error(err);
-              }
-        }
     }
 }
 
 async function postData(json) {
-    let connection ;
     try{
-        connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
-        console.log("Successfully connected to Oracle Database");
         const sql = `insert into CLIENTE (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
         // const data = JSON.parse(json) ;
 
@@ -95,16 +91,9 @@ async function postData(json) {
         console.log(result.rowsAffected, "Rows Inserted");
 
         connection.commit(); //commit
+        return JSON.stringify("Information added correctly!") ;
     }catch(err){
         console.log(err) ;
-    }finally{
-        if(connection) {
-            try {
-                await connection.close();
-                console.log("Succesfully posted a new task;") ;
-              } catch (err) {
-                console.error(err);
-              }
-        }
+        return err ;
     }
 }

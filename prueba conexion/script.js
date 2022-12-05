@@ -13,9 +13,10 @@ let tasks ;
 
 button.addEventListener( 'click' , event => {
     event.preventDefault(); 
-    const task = [
-        [desc.value, done.value] 
-    ] ;
+    const task = {
+        table: "CLIENTE",
+        values: [[desc.value, done.value] ],
+    } ;
     console.log(task) ;
     postData(task)
     .then(response => response.json())

@@ -43,7 +43,7 @@ app.get('/oracle', async (req, res) => {
 app.post('/add', async (req, res) => {
 
     const tasks = req.body ;
-    console.log(tasks) ;
+    // console.log(tasks) ;
     res.send(await postData(tasks)) ;
 })
 
@@ -57,7 +57,7 @@ app.listen(app.get('port'),()=>{
 async function getTodo() {
     try{
         let result = await connection.execute(
-            `select DNI, NOMBRE from CLIENTE`,
+            `select DNI, NOMBRE from CLIENTE order by DNI`,
             [],
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
     
@@ -83,10 +83,11 @@ async function getTodo() {
 
 async function postData(json) {
     try{
-        const sql = `insert into CLIENTE (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
+        const sql = `insert into ${json.table} (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
         // const data = JSON.parse(json) ;
 
-        let result = await connection.executeMany(sql, json);
+        console.log(json.values) ;
+        let result = await connection.executeMany(sql, json.values);
 
         console.log(result.rowsAffected, "Rows Inserted");
 

@@ -83,7 +83,12 @@ async function getTodo() {
 
 async function postData(json) {
     try{
-        const sql = `insert into ${json.table} (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
+        let sql ;
+        switch (json.table){
+            case ("CLIENTE"):
+                sql = `insert into ${json.table} (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
+                break;
+        }
         // const data = JSON.parse(json) ;
 
         console.log(json.values) ;

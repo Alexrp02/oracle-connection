@@ -13,10 +13,21 @@ let tasks ;
 
 button.addEventListener( 'click' , event => {
     event.preventDefault(); 
+    if (desc.value.length<9){
+        alert("El DNI tiene que tener mínimo 9 dígitos.")
+        return ;
+    }
+
+    if(done.value == "") {
+        alert("El nombre no puede estar vacío.") ;
+        return ;
+    }
+
     const task = {
         table: "CLIENTE",
         values: [[desc.value, done.value] ],
     } ;
+
     console.log(task) ;
     postData(task)
     .then(response => response.json())

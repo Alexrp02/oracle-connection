@@ -7,6 +7,7 @@ const oracle = document.getElementById('oracle') ;
 const contentDiv = document.getElementById('div') ;
 
 const div = document.createElement('p') ;
+    div.classList.add("empleado") ;
 
 let tasks ;
 
@@ -25,7 +26,7 @@ oracle.addEventListener('click', async e => {
     tasks.forEach(element => {
         // console.log(element) ;
         let content = div.cloneNode(true);
-        content.innerHTML = `${element.DESCRIPTION}, ${element.DONE}` ;
+        content.innerHTML = `${element.DNI}, ${element.NOMBRE}` ;
         contentDiv.appendChild(content) ;
     });
 })

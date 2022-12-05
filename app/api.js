@@ -19,7 +19,7 @@ app.use(cors({
 app.get('/', (req, res) => {    
     res.json(
         {
-            "Title": "Hola mundo"
+            "Title": "Hola"
         }
     );
 })
@@ -49,7 +49,7 @@ async function getTodo() {
         connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
         console.log("Successfully connected to Oracle Database");
         let result = await connection.execute(
-            `select description, done from todoitem`,
+            `select DNI, NOMBRE from CLIENTE`,
             [],
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
     
@@ -87,7 +87,7 @@ async function postData(json) {
     try{
         connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
         console.log("Successfully connected to Oracle Database");
-        const sql = `insert into todoitem (description, done) values(:1, :2)`;
+        const sql = `insert into CLIENTE (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
         // const data = JSON.parse(json) ;
 
         let result = await connection.executeMany(sql, json);

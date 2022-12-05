@@ -73,6 +73,3 @@ async function postData(json) {
     //     return res ;
     // });
 }
-
-// fetchData() ;
-// postData(task) ;

@@ -20,7 +20,7 @@ app.use(cors({
 async function initDatabaseConnection () {
     try {
         connection = await oracledb.getConnection({ user: "x4540120", password: "x4540120", connectionString: "oracle0.ugr.es:1521/practbd.oracle0.ugr.es" });
-        console.log("Successfully connected to Oracle Database");
+        console.log("Conexión a Oracle Database correcta!");
     } catch (error) {
         console.log(error) ;
     }
@@ -89,10 +89,10 @@ async function postData(json) {
         console.log(json.values) ;
         let result = await connection.executeMany(sql, json.values);
 
-        console.log(result.rowsAffected, "Rows Inserted");
+        console.log(result.rowsAffected, "Columnas insertadas");
 
         connection.commit(); //commit
-        return JSON.stringify("Information added correctly!") ;
+        return JSON.stringify("Información añadida correctamente!") ;
     }catch(err){
         console.log(err) ;
         return err ;

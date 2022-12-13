@@ -24,9 +24,11 @@ button.addEventListener( 'click' , event => {
     }
 
     const task = {
-        table: "CLIENTE",
-        values: [[desc.value, done.value] ],
-    } ;
+        'DNI' : desc.value ,
+        'NOMBRE' : done.value,
+    }
+    // [[desc.value, done.value] ] ;
+    
 
     console.log(task) ;
     postData(task)
@@ -61,7 +63,7 @@ async function fetchData() {
 }
 
 async function fetchTasks() {
-    const response = await fetch("http://127.0.0.1:3000/oracle").then((res) => res.json()).then((hello => {return hello})) ;
+    const response = await fetch("http://127.0.0.1:3000/getClientes").then((res) => res.json()).then((hello => {return hello})) ;
     return response ;
     // const data = response.json() ;
     // console.log(data) ;
@@ -77,7 +79,7 @@ async function postData(json) {
         body: JSON.stringify(json)
     }
 
-    return fetch('http://127.0.0.1:3000/add', requestOptions)
+    return fetch('http://127.0.0.1:3000/addCliente', requestOptions)
     // .then(response => response.json())
     // .then(res => {
     //     console.log(res) ;

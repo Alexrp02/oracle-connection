@@ -36,16 +36,35 @@ app.get('/', (req, res) => {
     );
 })
 
-app.get('/oracle', async (req, res) => {    
-    res.json(await getTodo()) ;
+//Endpoint para obtener todos los clientes que hay.
+app.get('/getClientes', async (req, res) => {    
+    res.json(await getClientes()) ;
 })
 
-app.post('/add', async (req, res) => {
-
-    const tasks = req.body ;
-    // console.log(tasks) ;
-    res.send(await postData(tasks)) ;
+app.get('/getEmpleados', async (req, res) => {    
+    res.json(await getEmpleados()) ;
 })
+
+app.get('/getMovimientos', async (req, res) => {    
+    res.json(await getMovimientos()) ;
+})
+
+app.get('/getPaquetes', async (req, res) => {    
+    res.json(await getPaquetes()) ;
+})
+
+app.get('/getProveedores', async (req, res) => {    
+    res.json(await getProveedores()) ;
+})
+
+//Endpoint para añadir cliente.
+app.post('/addCliente', async (req, res) => {
+
+    const body = req.body ;
+    // console.log(body) ;
+    res.send(await addCliente(body)) ;
+})
+
 
 //Iniciando el servidor, escuchando...
 app.listen(app.get('port'),()=>{
@@ -54,45 +73,80 @@ app.listen(app.get('port'),()=>{
 
 
 
-async function getTodo() {
+async function getClientes() {
     try{
         let result = await connection.execute(
             `select DNI, NOMBRE from CLIENTE order by DNI`,
             [],
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
-    
-        // console.log(result.rows) ;
-        // const rs = result.resultSet;
-        // const resultSet = rs ;
-        // console.log(resultSet) ;
-        // let row;
-    
-        // while ((row = await rs.getRow())) {
-        //     if (row.DONE)
-        //     console.log(row.DESCRIPTION, "is done");
-        //     else
-        //     console.log(row.DESCRIPTION, "is NOT done");
-        // }
-    
-        // await rs.close();
+        
         return result.rows ;
     }catch(err){
         console.log(err) ;
     }
 }
 
-async function postData(json) {
+async function getEmpleados() {
+    try{
+        let result = await connection.execute(
+            `select NIF, NOMBRE from EMPLEADO order by NIF`,
+            [],
+            { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
+        
+        return result.rows ;
+    }catch(err){
+        console.log(err) ;
+    }
+}
+
+async function getMovimientos() {
+    try{
+        let result = await connection.execute(
+            `select CODIGO, VALOR from MOVIMIENTO order by CODIGO`,
+            [],
+            { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
+        
+        return result.rows ;
+    }catch(err){
+        console.log(err) ;
+    }
+}
+
+async function getPaquetes() {
+    try{
+        let result = await connection.execute(
+            `select NUM_SEGUIMIENTO, ESTADO from PAQUETE order by NUM_SEGUIMIENTO`,
+            [],
+            { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
+        
+        return result.rows ;
+    }catch(err){
+        console.log(err) ;
+    }
+}
+
+async function getProveedores() {
+    try{
+        let result = await connection.execute(
+            `select CIF, NOMBRE from CLIENTE order by CIF`,
+            [],
+            { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
+        
+        return result.rows ;
+    }catch(err){
+        console.log(err) ;
+    }
+}
+
+//Insertar valores en Cliente
+async function addCliente(json) {
     try{
         let sql ;
-        switch (json.table){
-            case ("CLIENTE"):
-                sql = `insert into ${json.table} (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:1, :2, 'Q', 'Q', 'Q', 'Q', 'Q')`;
-                break;
-        }
+        sql = `insert into CLIENTE (DNI, NOMBRE, APELLIDOS, TELEFONO, EDAD, DIRECCION, CORREO) values(:DNI, :NOMBRE, 'Q', 'Q', 'Q', 'Q', 'Q')`;
         // const data = JSON.parse(json) ;
 
-        console.log(json.values) ;
-        let result = await connection.executeMany(sql, json.values);
+        console.log(json) ;
+        let result = await connection.execute(sql, json);
 
         console.log(result.rowsAffected, "Columnas insertadas");
 

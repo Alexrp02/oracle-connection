@@ -21,7 +21,73 @@
         <button type="submit" id="button">Submit</button>
     </form>
 
-    <button id="oracle">Presiona para obtener los clientes</button> 
+    <button id="oracle">Presiona para obtener los clientes</button>
+    <button id="getPaquetes" onclick="showPaquetes()">Presiona para obtener los paquetes</button> 
+    <button id="empleados" onclick="showEmpleados()">Presiona para obtener los empleados</button> 
+
+    <form id="paquetes" onsubmit="submitForm(this)">
+        <div>
+            <label for="num">NUM</label>
+            <input name="num" type="text" id="num">
+        </div>
+        <div>
+            <label for="peso">PESO</label>
+            <input type="text" id="peso">
+        </div>
+        <div>
+            <label for="volumen">VOLUMEN</label>
+            <input type="text" id="volumen">
+        </div>
+        <div>
+            <label for="destino">DESTINO</label>
+            <input type="text" id="destino">
+        </div>
+        <div>
+            <label for="remitente">REMITENTE</label>
+            <input type="text" id="remitente">
+        </div>
+        <div>
+            <label for="origen">ORIGEN</label>
+            <input type="text" id="origen">
+        </div>
+        <div>
+            <label for="dni">DNI</label>
+            <input type="text" id="dni">
+        </div>
+        <div>
+            <label for="estado">ESTADO</label>
+            <input type="text" id="estado">
+        </div>
+        <div>
+            <label for="almacen">ALMACEN</label>
+            <input type="text" id="almacen">
+        </div>
+        <button type="submit" id="button2" >Submit</button>
+    </form>
+
+    <form id="movimientos">
+        <div>
+            <label for="CODIGO">CODIGO</label>
+            <input type="text" id="CODIGO">
+        </div>
+        <div>
+            <label for="VALOR">VALOR</label>
+            <input type="text" id="VALOR">
+        </div>
+        <div>
+            <label for="CONCEPTO">CONCEPTO</label>
+            <input type="text" id="CONCEPTO">
+        </div>
+        <div>
+            <label for="FECHA">FECHA</label>
+            <input type="text" id="FECHA">
+        </div>
+        <div>
+            <label for="TIPO">TIPO</label>
+            <input type="text" id="TIPO">
+        </div>
+        <button type="submit" id="button3" >Submit</button>
+    </form>
 
     <p id="div"></p>
 </body>

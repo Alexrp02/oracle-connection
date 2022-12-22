@@ -65,6 +65,19 @@ app.post('/addCliente', async (req, res) => {
     res.send(await addCliente(body)) ;
 })
 
+app.post('/addPaquete', async (req, res) => {
+
+    const body = req.body ;
+    // console.log(body) ;
+    res.send(await addPaquete(body)) ;
+})
+
+app.post('/addMovimiento', async (req, res) => {
+
+    const body = req.body ;
+    // console.log(body) ;
+    res.send(await addMovimiento(body)) ;
+})
 
 //Iniciando el servidor, escuchando...
 app.listen(app.get('port'),()=>{
@@ -115,7 +128,7 @@ async function getMovimientos() {
 async function getPaquetes() {
     try{
         let result = await connection.execute(
-            `select NUM_SEGUIMIENTO, ESTADO from PAQUETE order by NUM_SEGUIMIENTO`,
+            `select REMITENTE, NUM_SEGUIMIENTO, ESTADO from PAQUETE order by NUM_SEGUIMIENTO`,
             [],
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
         
@@ -157,3 +170,43 @@ async function addCliente(json) {
         return err ;
     }
 }
+
+async function addPaquete(json) {
+    try{
+        let sql ;
+        sql = `insert into PAQUETE values(:NUM_SEGUIMIENTO, :PESO, :VOLUMEN , :DESTINO, :REMITENTE, :ORIGEN, :DNI, :ESTADO, :COD_ALMACEN)`;
+        // const data = JSON.parse(json) ;
+
+        console.log(json) ;
+        let result = await connection.execute(sql, json);
+
+        console.log(result.rowsAffected, "Columnas insertadas");
+
+        connection.commit(); //commit
+        return JSON.stringify("Información añadida correctamente!") ;
+    }catch(err){
+        console.log(err) ;
+        return err ;
+    }
+}
+
+async function addMovimiento(json) {
+    try{
+        let sql ;
+        sql = `insert into MOVIMIENTO values(:CODIGO, :VALOR, :CONCEPTO , :FECHA, :TIPO)`;
+        // const data = JSON.parse(json) ;
+
+        console.log(json) ;
+        let result = await connection.execute(sql, json);
+
+        console.log(result.rowsAffected, "Columnas insertadas");
+
+        connection.commit(); //commit
+        return JSON.stringify("Información añadida correctamente!") ;
+    }catch(err){
+        console.log(err) ;
+        return err ;
+    }
+}
+
+

@@ -102,7 +102,7 @@ async function getClientes() {
 async function getEmpleados() {
     try{
         let result = await connection.execute(
-            `select NIF, NOMBRE from EMPLEADO order by NIF`,
+            `select NOMBRE, TELEFONO from EMPLEADO order by NIF`,
             [],
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
         

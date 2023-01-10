@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baiben | pagina de inicio</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/cabecera.css">
+    <script src="scripts/index.js" defer></script>
+    <script src="calculadora.js" defer></script> 
+    <script>
+        function guardaNum() {
+            window.localStorage.setItem("num", document.getElementById("seguimiento").value) ;
+        }
+    </script>
+</head>
+<body>
+    <div class="cabecera">
+        <div id="titulo">
+           <h1><a href="index.html">Baiben</a></h1>
+            <p>Volando voy</p> 
+        </div> 
+        <div id="menu">
+            <ul class="nav">
+                <li><a href="log.html">Inicio</a></li>
+                <li><a href="empleados.html">Lista de empleados</a></li>
+                <li><a href="#">Puntos de entrega</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Información de la empresa</a></li>
+            </ul>   
+        </div>
+
+        <div id="zona"><a href="">Accede a tu zona</a></div>
+    </div>
+
+    <div id="content">
+        <div id="envio">
+            <form action="seguimiento.html" onsubmit="guardaNum()">
+                <label>
+                    <input placeholder="Numero de seguimiento" type="text" id="seguimiento">
+                </label>
+            </form>
+        </div>
+        <div class="calculadora express">
+            <form action="">
+                <h2>Calculadora express</h2>
+                <label>
+                    <input placeholder="Peso" type="text" id="peso">
+                </label>
+                <label>
+                    <input placeholder="Largo" type="text" id="largo">
+                </label>
+                <label>
+                    <input placeholder="Alto" type="text" id="altura">
+                </label>
+                <label>
+                    <input placeholder="Ancho" type="text" id="ancho">
+                </label>
+                <label for="button">
+                    <button id="button">Calcular</button>
+                </label>
+                <label>
+                    <output id="resultado"></output>
+                </label>
+            </form>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biaben | Pagina de inicio</title>
+    <link rel="stylesheet" href="usuario.css">
+</head>
+<body>
+    <div class="cabecera">
+        <div id="titulo">
+            <h1>Biaben</h1>
+            <p>Volando voy</p>
+        </div>
+    </div>
+    <div class="menu">
+        <ul class="nav">
+            <li><a href="log.html">Inicio</a></li>
+            <li><a href="#">Lista de empleados</a>
+                <ul>
+                    <li><a href="#">Paco</a></li>
+                    <li><a href="#">Ana</a></li>
+                    <li><a href="#">Maria</a></li>
+                    <li><a href="#">Jose</a></li>
+                    <li><a href="#">Marcos</a></li>
+                    <li><a href="#">Antonio</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Puntos de entrega</a>
+                <ul>
+                    <li><a href="#">Granada</a></li>
+                    <li><a href="#">Almeria</a></li>
+                    <li><a href="#">Jaen</a></li>
+                    <li><a href="#">Malaga</a></li>
+                    <li><a href="#">Cordoba</a></li>
+                    <li><a href="#">Sevilla</a></li>
+                    <li><a href="#">Huelva</a></li>
+                    <li><a href="#">Cadiz</a></li>
+                </ul>
+            </li>
+            <li><a href="valoracion.html">Valoracion de empleados</a></li>
+            <li><a href="#">Información de la empresa</a></li>
+        </ul>
+    </div>
+    <div id="envio">
+        <form action="">
+            <label>    
+                <input placeholder="Numero de seguimiento" type="text" id="seguimiento">
+            </label>    
+        </form> 
+    </div>
+    <div class="calculadora">
+        <h1>Calculadora express</h1>
+        <p>Calcula aqui de forma rapida y sencilla el precio de tus envios</p>
+        <form action="" method="get">
+            <label>
+                <input type="number" name="peso" id="peso" placeholder="Peso">
+            </label>
+            <label>Kg</label>
+            <label>
+                <input type="number" name="altura" id="altura" placeholder="Altura">
+            </label>
+            <label>
+                <input type="number" name="ancho" id="ancho" placeholder="Ancho">
+            </label>
+            <label>
+                <input type="number" name="largo" id="largo" placeholder="Largo">
+            </label>
+            <button id="button">Calcular</button>           
+            <label>
+                <output id="resultado"></output>
+            </label>
+        </form>
+    </div>
+</body>
+</html>

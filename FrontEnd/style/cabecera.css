@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+body{
+    font-family: Arial, Helvetica;
+    background: #e8e8e8;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#menu{
+    /* margin: auto; */
+    max-width: 800px;
+    /* margin-top: 50px; */
+}
+#zona {
+    position: absolute;
+    border: 1px solid red;
+    background-color: white;
+    padding: 4px;
+    border-radius: 8px;
+    top: 4px;
+    right: 4px;
+    transition: all 1s cubic-bezier(.41,1.21,.93,.71);
+}
+#zona:hover{
+    background-color: rgb(248, 185, 185);
+    box-shadow: 0px 0px 10px black;
+}
+
+
+ul, ol{
+    list-style: none;
+    margin: 0;
+}
+
+.nav > li{
+    float: left;
+}
+
+.nav li a{
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 12px;
+    display: block;
+}
+
+.nav li a:hover{
+    background-color: #434343;
+}
+
+#titulo{
+    color: white;
+    text-align: center;
+    width: 100vw;
+    height: auto;
+    background-image: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0, 0, 0,0.1)), url(../paquete_cabecera.jpg);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: 0% 20%;
+    
+}
+
+#titulo h1{
+    font-size: 50px;
+    display: inline-block;
+    padding: 8px;
+    margin: 0;
+    margin-top: 16px;
+    border: 1px solid white;
+}
+
+#titulo p{
+    font-size: 25px;
+}
+
+#titulo h1 a {
+    text-decoration: none;
+
+    color: white;
+}
+.cabecera{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

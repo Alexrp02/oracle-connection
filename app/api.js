@@ -53,6 +53,10 @@ app.get('/getPaquetes', async (req, res) => {
     res.json(await getPaquetes()) ;
 })
 
+app.post('/getPaquete', async (req, res) => {    
+    res.json(await getPaquete(req.body)) ;
+})
+
 app.get('/getProveedores', async (req, res) => {    
     res.json(await getProveedores()) ;
 })
@@ -130,6 +134,20 @@ async function getPaquetes() {
         let result = await connection.execute(
             `select REMITENTE, NUM_SEGUIMIENTO, ESTADO from PAQUETE order by NUM_SEGUIMIENTO`,
             [],
+            { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
+        
+        return result.rows ;
+    }catch(err){
+        console.log(err) ;
+    }
+}
+
+async function getPaquete(json) {
+    try{
+        console.log(json) ;
+        let result = await connection.execute(
+            `select * from PAQUETE where NUM_SEGUIMIENTO=(:ID)`,
+            json,
             { resultSet: false, outFormat: oracledb.OUT_FORMAT_OBJECT });
         
         return result.rows ;
